@@ -1,27 +1,27 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
 
+# Byte-compiled / optimized / DLL files
 # Distribution / packaging
+# Editable-install metadata
+# Local storage (never commit club data)
+# OS / editor
+# Virtual environments
+*$py.class
+*.egg
+*.egg-info/
+*.json.tmp
+*.py[cod]
+*.pyc
+.DS_Store
+.book_club_host.json
+.env
+.env.*
+.idea/
+.venv/
+.vscode/
+__pycache__/
 build/
 dist/
-*.egg-info/
-*.egg
-
-# Virtual environments
-.venv/
-venv/
+dist/*.tmp
 env/
-
-# Local storage (never commit club data)
-.book_club_host.json
-*.json.tmp
-
-# Editable-install metadata
-*.egg-info/
-
-# OS / editor
-.DS_Store
-.idea/
-.vscode/
+node_modules/
+venv/
