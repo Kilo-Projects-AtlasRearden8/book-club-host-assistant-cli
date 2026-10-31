@@ -22,3 +22,5 @@ env/
 .DS_Store
 .idea/
 .vscode/
+# Editable install metadata
+*.egg-info/
