@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "book-club-host-assistant-cli"
+version = "0.1.0"
+description = "Local-first Python CLI to run a book club: members, reading schedules, and AI-generated discussion prompts."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [{name = "Asdale Dynamics, LLC"}]
+keywords = ["book-club", "cli", "local-ai", "ollama"]
+
+[project.scripts]
+book-club = "book_club.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["book_club*"]
