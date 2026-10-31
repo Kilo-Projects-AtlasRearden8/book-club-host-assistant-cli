@@ -18,9 +18,10 @@ env/
 .book_club_host.json
 *.json.tmp
 
+# Editable-install metadata
+*.egg-info/
+
 # OS / editor
 .DS_Store
 .idea/
 .vscode/
-# Editable install metadata
-*.egg-info/

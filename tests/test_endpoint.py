@@ -77,7 +77,7 @@ class LLMClientTests(unittest.TestCase):
             return _FakeResponse({"choices": [{"message": {"content": "ok"}}]})
 
         with mock.patch("book_club.endpoint.urllib.request.urlopen", side_effect=fake_urlopen):
-            client = LLMClient(api_key="sk-test123")
+            client = LLMClient(api_key="test-key")
             client.chat([{"role": "user", "content": "hi"}])
 
     def test_http_error_raises_endpoint_error(self):

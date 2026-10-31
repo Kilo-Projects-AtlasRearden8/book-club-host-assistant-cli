@@ -1,79 +1,97 @@
 # Book Club Host Assistant CLI
 
-A local-first Python command-line tool for running a book club: track members,
-keep a reading schedule, and generate discussion prompts with a local LLM.
-Built by **Asdale Dynamics, LLC** — beginner-friendly AI tools and practical
-apps for authors, small businesses, and everyday life.
+A friendly, local-first command-line tool for running a book club. Keep track of
+your members, your reading schedule, and generate warm discussion prompts — all
+on your own computer, with no API keys required.
+
+Built by **Asdale Dynamics, LLC** — beginner-friendly AI tools, books, and
+guides for authors, small businesses, and everyday life. AI explained "like a
+friend would": plain English, step by step, never condescending.
 
 ## What it does
 
-- **Members:** add and list club members (names and optional email addresses)
+- **Members:** add members and see who's in the club
 - **Books:** keep a catalog of books with title, author, and ISBN
-- **Reading schedule:** schedule start/end dates and meeting dates per book,
-  with an optional location and notes, and print a readable schedule
-- **Discussion prompts:** generate warm, open-ended discussion questions for a
-  book via an OpenAI-compatible endpoint (default: a local Ollama instance at
-  `http://localhost:11434/v1`, model `llama3`). If the endpoint is unreachable,
-  the tool falls back to built-in prompts so your meeting is never derailed.
+- **Reading schedule:** set start/end dates and a meeting date for each book,
+  with an optional location and notes
+- **Printable schedule:** print a clean, readable schedule for your meetings
+- **Discussion prompts:** generate open-ended, beginner-friendly discussion
+  questions for any book via a local LLM endpoint (defaults to Ollama at
+  `http://localhost:11434/v1`, model `llama3`). If the endpoint is down, the
+  tool falls back to built-in prompts so your meeting is never derailed.
 
-All data lives in a single local JSON file (default `~/.book_club_host.json`).
-No API keys are required, nothing is sent anywhere unless you point the tool at
-an endpoint yourself, and it works offline out of the box.
+All of your data lives in a single JSON file on your computer
+(default `~/.book_club_host.json`). Nothing is sent anywhere unless you choose
+to point the tool at an endpoint yourself, and everything works offline out of
+the box.
 
 ## Install
+
+You'll need Python 3.9 or newer.
 
 ```bash
 git clone <this-repo>
 cd book-club-host-assistant-cli
-pip install -e .
+python3 -m venv venv
+./venv/bin/pip install -e .
 ```
 
-Or run without installing:
+This creates a `book-club` command you can run anywhere:
+
+```bash
+book-club --help
+```
+
+If you'd rather not install, you can run it straight from the folder:
 
 ```bash
 PYTHONPATH=src python3 -m book_club.cli --help
 ```
 
-## Usage
+*(On some systems `pip install` needs a virtual environment — that's why we
+create `venv` first.)*
 
-Add a member:
+## Walkthrough
+
+### Add a member
 
 ```bash
 book-club add-member "Ada Lovelace" --email ada@example.com
+book-club add-member "Dylan Asdale"
 ```
 
-List members:
+### List members
 
 ```bash
 book-club list-members
 ```
 
-Add a book:
+### Add a book
 
 ```bash
 book-club add-book "The Hobbit" "J.R.R. Tolkien" --isbn 978-0-261-10221-7
 ```
 
-List books (shows the ids you need for scheduling):
+### List books (gives you the IDs you need for scheduling)
 
 ```bash
 book-club list-books
 ```
 
-Schedule a reading:
+### Schedule a reading
 
 ```bash
 book-club schedule <book-id> 2026-11-01 2026-11-30 2026-12-05 \
   --location "The Library" --notes "Chapters 1-5"
 ```
 
-Print the schedule:
+### Print the schedule
 
 ```bash
 book-club print-schedule
 ```
 
-Generate discussion prompts for a book (hits your local Ollama by default):
+### Generate discussion prompts
 
 ```bash
 book-club generate-prompts <book-id> --count 5
@@ -94,25 +112,24 @@ book-club --storage ./my-club.json ...
 
 ## Local-first by design
 
-- Storage: one JSON file on your machine, nowhere else
-- Default endpoint: Ollama running locally (no account, no key)
-- Fallback: built-in discussion prompts if the endpoint is down
-- No tracking, no telemetry, no secrets stored in files
+- **Storage:** one JSON file on your machine, nowhere else
+- **Default endpoint:** Ollama running locally (no account, no key)
+- **Fallback:** built-in discussion prompts if the endpoint is unreachable
+- **No tracking, no telemetry, no secrets stored in files**
 
 ## Tests
+
+All tests use mocked endpoints — no network and no API keys needed:
 
 ```bash
 PYTHONPATH=src python3 -m unittest discover -s tests
 ```
 
-All tests use mocked endpoints — no network and no API keys required.
-
 ## Credits
 
 Created by **Asdale Dynamics, LLC** (Dylan Asdale, Indiana, formed October
 2026), publisher of beginner-friendly AI education including *The Massive AI
-Manual* and the hub site dylanasdale.github.io. AI explained "like a friend
-would": plain English, step by step, never condescending.
+Manual* and the hub site dylanasdale.github.io.
 
 ## License
 
